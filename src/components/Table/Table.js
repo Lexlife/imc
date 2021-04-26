@@ -4,12 +4,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import About from '../About/About';
 
 const Table = () => {
-
-  let arr = [];
+  const arr = [];
   for (let key in formData) {
     arr.push(formData[key]);
   }
-
   return (
     <Router>
       <nav>
@@ -22,8 +20,10 @@ const Table = () => {
                 <tr>
                   <th>
                     <ol key={Math.random() * 100000}>
-                      <li><Link to={`/${el.id}`}>Name: {el._name}</Link></li>
-                      <li><Link to={`/${el.id}`}>Sex: {el._sex < 2 ? 'male' : 'female'}</Link></li>
+                      <li><Link to={`/${el.id}`}>Идентификатор: {el.id}</Link></li>
+                      <li><Link to={`/${el.id}`}>Иностранец: {el._foreigner ? 'true' : 'false'}</Link></li>
+                      <li><Link to={`/${el.id}`}>Имя: {el._name}</Link></li>
+                      <li><Link to={`/${el.id}`}>Пол: {el._sex}</Link></li>
                     </ol>
                   </th>
                 </tr>

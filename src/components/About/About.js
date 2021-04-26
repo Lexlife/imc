@@ -4,15 +4,18 @@ import './About.css';
 
 const About = (props) => {
   const [pathname, setPathname] = useState(null);
+  const [name, setName] = useState('');
+  console.log(name);
   let location = useLocation();
   React.useEffect(() => {
     setPathname(location.pathname);
   }, [location]);
 
-  let arr = [];
+  const arr = [];
   for (let key in props) {
     arr.push(props[key]);
   }
+
 
   return (
     <>
@@ -21,20 +24,48 @@ const About = (props) => {
           <div className="about" key={Math.random() * 100000}>
             <div>
               {`${pathname}` === `/${el.id}` ?
-                <table style={{ margin: '20px' }}>
-                  <thead>
-                  <tr>
-                    <th>
-                      <ol key={Math.random() * 100000}>
-                        <li>id: {el.id}</li>
-                        <li>Foreigner: {el._foreigner ? 'yes' : 'no'}</li>
-                        <li>Name: {el._name}</li>
-                        <li>Sex: {el._sex < 2 ? 'male' : 'female'}</li>
-                      </ol>
-                    </th>
-                  </tr>
-                  </thead>
-                </table>
+                <form>
+                  <table className="tableInput">
+                    <thead>
+                    <tr>
+                      <th>
+                        <label>
+                          Форма
+                        </label><br />
+                        <label>
+                          Имя:
+                        </label>&nbsp;
+                        <input
+                          value={el._name}
+                          onChange={event => setName(event.target.value)}
+                          name="name"
+                          type="text"
+                        />
+                        <br />
+                        <label>
+                          Иностранец:
+                        </label>&nbsp;
+                        <input
+                          type="checkbox"
+                          name="foreigner"
+                          checked={el._foreigner}
+                          readOnly
+                        /><br />
+                        <label>
+                          Пол:
+                        </label>&nbsp;
+                        <select id="sex" name="sex">
+                          {el._sex < 2 ?
+                            <option value="male">Муж</option>
+                            :
+                            <option value="female">Жен</option>
+                          }
+                        </select>
+                      </th>
+                    </tr>
+                    </thead>
+                  </table>
+                </form>
                 :
                 null
               }
